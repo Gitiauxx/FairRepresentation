@@ -8,6 +8,7 @@ class Train(object):
     def __init__(self,
                 model,
                 data,
+                sess=None,
                 learning_rate=0.001,
                 batch_size=32):
 
@@ -30,7 +31,7 @@ class Train(object):
         )
 
         # initialize session
-        self.sess = tf.Session()
+        self.sess = sess or tf.Session()
         self.sess.run(tf.global_variables_initializer())
         self.saver = tf.train.Saver()  # for saving model checkpoints
 

@@ -1,13 +1,13 @@
 import tensorflow as tf
-from lafr import mlp
+from lafr.mlp import MLP
 from abc import ABC, abstractmethod
 
 # defaults
 EPS = 1e-8
 HIDDEN_LAYER_SPECS = {  # format as dict that maps network to list of hidden layer widths
-    'enc': [],
-    'cla': [],
-    'dec': [],
+    'enc': [2],
+    'cla': [1],
+    'dec': [2],
     'aud': [5],
 }
 CLASS_COEFF = 1.
@@ -34,7 +34,7 @@ class AbstractBaseNet(ABC):
                  xdim=XDIM,
                  ydim=YDIM,
                  zdim=ZDIM,
-                 adim=SDIM,
+                 sdim=SDIM,
                  hidden_layer_specs=HIDDEN_LAYER_SPECS,
                  seed=SEED,
                  hinge=HINGE,
@@ -96,15 +96,16 @@ class AbstractBaseNet(ABC):
 
 
 
-class DPGanLafr(ABC):
+class DPGanLafr(AbstractBaseNet):
     def _define_vars(self):
+        
         assert(
             isinstance(self.hidden_layer_specs, dict) and
-            all([net_name in self.hidden_layer_specs for net_name in ['enc', 'cla', 'aud', 'rec']])
+            all([net_name in self.hidden_layer_specs for net_name in ['enc', 'cla', 'aud', 'dec']])
         )
         self.X = tf.placeholder("float", [None, self.xdim], name='X')
         self.Y = tf.placeholder("float", [None, self.ydim], name='Y')
-        self.S = tf.placeholder("float", [None, self.adim], name='S')
+        self.S = tf.placeholder("float", [None, self.sdim], name='S')
         self.epoch = tf.placeholder("float", [1], name='epoch')
         return
 
@@ -118,9 +119,9 @@ class DPGanLafr(ABC):
     def _decode(self, latents, scope_name='model/enc_dec', reuse=False):
         with tf.variable_scope(scope_name, reuse=reuse):
             mlp = MLP(name='latents_to_inputs',
-                      shapes=[self.zdim] + self.hidden_layer_specs['dec'] + [self.xdim],
+                      shapes=[self.zdim + 1] + self.hidden_layer_specs['dec'] + [self.xdim],
                       activ=ACTIV)
-            Z_and_S = tf.concatenate([latents, self.S], axis=1)
+            Z_and_S = tf.concat([latents, self.S], axis=1)
             return mlp.forward(Z_and_S)
 
     def _auditor(self, latents, scope_name='model/auditor', reuse=False):
@@ -137,9 +138,9 @@ class DPGanLafr(ABC):
         return tf.reduce_mean(tf.square(X - X_hat))
 
     def _get_aud_loss(self, S, S_hat):
-        n_1 = tf.sum(S)
-        n_2 = tf.sum(1 - S)
-        return tf.sum(1 / n_1 * S * (1 - S_hat) + 1 / n_2 * (1 - S) * S_hat)
+        n_1 = tf.reduce_sum(S)
+        n_2 = tf.reduce_sum(1 - S)
+        return tf.reduce_sum(1 / n_1 * S * (1 - S_hat) + 1 / n_2 * (1 - S) * S_hat)
 
     def _get_loss(self):
         self.recon_coeff * self.decoder_loss - self.auditor_coeff * self.auditor_loss

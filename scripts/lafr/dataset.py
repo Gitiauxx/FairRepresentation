@@ -7,10 +7,10 @@ class Dataset(object):
                 datafile,
                 features,
                 sensitive_attribute,
-                seed=0)
+                seed=0):
         
         self.datafile = datafile
-        self.seed = 0
+        self.seed = seed
         self.features = features
         self.sensitive_attribute = sensitive_attribute
 
@@ -20,7 +20,7 @@ class Dataset(object):
     def load(self):
         if self.loaded == False:
             data = pd.read_csv(self.datafile)
-            data.set_index(range(len(data)), inplace=True)
+            data.set_index(np.arange(len(data)), inplace=True)
             train = data.loc[np.random.choice(data.index, int(0.7 * len(data)), replace=False), :]
             test = data.drop(train.index)
 

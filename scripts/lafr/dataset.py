@@ -27,8 +27,10 @@ class Dataset(object):
             self.x_train = np.array(train[self.features])
             self.x_test = np.array(test[self.features])
 
-            self.sensitive_train = np.array(train[self.sensitive_attribute]).ravel()
-            self.sensitive_test = np.array(test[self.sensitive_attribute]).ravel()
+            self.sensitive_train = np.array(train[self.sensitive_attribute])
+            self.sensitive_train = self.sensitive_train[:, np.newaxis]
+            self.sensitive_test = np.array(test[self.sensitive_attribute])
+            self.sensitive_test = self.sensitive_test[:, np.newaxis]
             
             self.loaded = True
 

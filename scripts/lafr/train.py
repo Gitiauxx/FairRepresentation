@@ -30,6 +30,13 @@ class Train(object):
             var_list=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope='model/attacker')
         )
 
+        # direct attacker train op
+        self.opt_att_direct = tf.train.AdamOptimizer(learning_rate=learning_rate)
+        self.att_op_direct = self.opt_att.minimize(
+            self.model.attacker_direct_loss,
+            var_list=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope='model/direct')
+        )
+
         # encoder-decoder op
         self.opt_enc_dec = tf.train.AdamOptimizer(learning_rate=learning_rate)
         self.enc_dec_op = self.opt_enc_dec.minimize(
@@ -47,7 +54,7 @@ class Train(object):
 
         for epoch in range(n_epochs):
             self.batches_seen = 0
-            print('starting Epoch {:d}'.format(epoch))
+            #print('starting Epoch {:d}'.format(epoch))
 
             train_iter = self.data.get_batch_iterator('train', self.batch_size)
             train_L = {'auditor_err': 0, 'recon_err': 0., 'attacker_err': 0.}
@@ -69,11 +76,15 @@ class Train(object):
                 _, attacker_acc = self.sess.run(attacker_op, feed_dict)
                 train_L['attacker_err'] += attacker_acc
 
+                # attacker using directly inputs
+                attacker_direct_op = [self.att_op_direct]
+                self.sess.run(attacker_direct_op, feed_dict)
+
                 self.batches_seen += 1
 
             for k in train_L:
                 train_L[k] /= self.batches_seen
             
-            print(train_L)
+            #print(train_L)
 
 

@@ -3,11 +3,12 @@ import tensorflow as tf
 
 class MLP(object):
 
-    def __init__(self, name, shapes, activ):
+    def __init__(self, name, shapes, activ, beta=0.):
         self.name = name
         self.shapes = shapes
         self.weights = self.make_wts_biases()
         self.activ = activ
+        self.beta = beta
 
     def make_wts_biases(self):
         w_dict = {}
@@ -39,6 +40,6 @@ class MLP(object):
                 pass
             else:
                 raise Exception('bad activation function')
-            prev_L = L
+            prev_L = L + self.beta * tf.nn.l2_loss(self.weights[layer]['w'])
         L = tf.add(tf.matmul(prev_L, self.weights[num_layers - 1]['w']), self.weights[num_layers - 1]['b'])
         return L

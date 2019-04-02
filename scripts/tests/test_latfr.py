@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
 import tensorflow as tf
+import sys
+import argparse
 
-from lafr import models, train, dataset, test
+from lafr import models, train, dataset, test, logging
 
-def test1(n, unbalance=1, sigma_noise=0.0):
-    
+def test1(n, resdirname, unbalance=1, sigma_noise=0.0, tag=None):
 
     # simulate a synthethic data with n covariates
     data = pd.DataFrame(index=np.arange(n))
@@ -36,11 +37,14 @@ def test1(n, unbalance=1, sigma_noise=0.0):
     # get dataset
     ds = dataset.Dataset('test_lafr.csv', ['x1', 'x2'], 'sensitive')
 
+    # logging file
+    reslogger = logging.ResultLogger(resdirname, tag=tag)
+
     with tf.Session() as sess:
 
         #create Trainer
         trainer = train.Train(md, ds, sess=sess)
-        tester = test.Test(md, ds, sess)
+        tester = test.Test(md, ds, sess, reslogger)
 
         # training
         trainer.fit(100, 1)
@@ -48,8 +52,29 @@ def test1(n, unbalance=1, sigma_noise=0.0):
         # evaluation
         tester.evaluate(32)
 
+def main(**kwargs):
+
+    unbalance = 0
+    if kwargs['unbalance']:
+        unbalance = kwargs['unbalance']
+    if kwargs['tag']:
+        tag = kwargs['tag']
+    
+    test1(20000, 'C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests', 
+                unbalance = unbalance,
+                tag=tag)
+
+
 if __name__ == "__main__":
-    test1(20000)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--unbalance')
+    parser.add_argument('--tag')
+    args = parser.parse_args()
+
+    kwargs_dict = {'unbalance': float(args.unbalance), 'tag':args.tag}
+    
+    main(**kwargs_dict)
 
 
 

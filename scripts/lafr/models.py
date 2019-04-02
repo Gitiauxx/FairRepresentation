@@ -9,7 +9,8 @@ HIDDEN_LAYER_SPECS = {  # format as dict that maps network to list of hidden lay
     'cla': [1],
     'dec': [8, 2],
     'aud': [8, 2],
-    'att': [8, 2]
+    'att': [8, 2],
+    'direct_att': [8, 2]
 }
 CLASS_COEFF = 1.
 AUDITOR_COEFF = 0.
@@ -57,15 +58,20 @@ class AbstractBaseNet(ABC):
         self.X_hat = self._decode(self.Z)
         self.S_hat_logits = self._auditor(self.Z)
         self.S_hat_attack_logits= self._attacker(self.Z)
+        self.S_hat_attack_direct_logits= self._attacker_direct(self.X)
         self.S_hat = self._get_sensitive_from_logits(self.S_hat_logits)
         self.S_hat_attack= self._get_sensitive_from_logits(self.S_hat_attack_logits)
+        self.S_hat_attack_direct= self._get_sensitive_from_logits(self.S_hat_attack_direct_logits)
         self.S_att = self._get_prediction_from_logits(self.S_hat_attack_logits)
+        self.S_att_dir = self._get_prediction_from_logits(self.S_hat_attack_direct_logits)
         self.S_aud = self._get_prediction_from_logits(self.S_hat_logits)
 
         self.decoder_loss = self._get_dec_loss(self.X, self.X_hat)
         self.auditor_loss = self._get_aud_loss(self.S, self.S_hat)
         self.attacker_loss = self._get_att_loss(self.S, self.S_hat_attack)
+        self.attacker_direct_loss = self._get_att_loss(self.S, self.S_hat_attack_direct)
         self.attacker_accuracy = self._get_acc(self.S, self.S_att)
+        self.attacker_direct_accuracy= self._get_acc(self.S, self.S_att_dir)
         self.auditor_accuracy = self._get_acc(self.S, self.S_aud)
         self.loss = self._get_loss()
 
@@ -75,7 +81,7 @@ class AbstractBaseNet(ABC):
         pass
 
     @abstractmethod
-    def _encode(self, inputs, scope_name='model/enc_dec', reuse=False): # encode inputs to latent
+    def _encode(self, inputs, scope_name='model/enc_dec', reuse=False, beta=0.): # encode inputs to latent
         pass
 
     @abstractmethod
@@ -88,6 +94,10 @@ class AbstractBaseNet(ABC):
 
     @abstractmethod
     def _attacker(self, latent, scope_name='model/attacker', reuse=False): # attacker to find sub-population where it can predict sensitive attributes
+        pass
+
+    @abstractmethod
+    def _attacker_direct(self, inputs, scope_name='model/attacker', reuse=False): # attacker to find sub-population where it can predict sensitive attributes
         pass
     
     @abstractmethod
@@ -128,11 +138,11 @@ class DPGanLafr(AbstractBaseNet):
         self.epoch = tf.placeholder("float", [1], name='epoch')
         return
 
-    def _encode(self, inputs, scope_name='model/enc_dec', reuse=False):
+    def _encode(self, inputs, scope_name='model/enc_dec', reuse=False,beta=0.):
         with tf.variable_scope(scope_name, reuse=reuse):
             mlp = MLP(name='inputs_to_latents',
                       shapes=[self.xdim] + self.hidden_layer_specs['enc'] + [self.zdim],
-                      activ=ACTIV)
+                      activ=ACTIV, beta=beta)
             return mlp.forward(inputs)
 
     def _decode(self, latents, scope_name='model/enc_dec', reuse=False):
@@ -156,6 +166,13 @@ class DPGanLafr(AbstractBaseNet):
                       shapes=[self.zdim] + self.hidden_layer_specs['att'] + [self.sdim],
                       activ=ACTIV)
             return mlp.forward(latents)
+
+    def _attacker_direct(self, inputs, scope_name='model/direct', reuse=False):
+        with tf.variable_scope(scope_name, reuse=reuse):
+            mlp = MLP(name='inputs_to_sensitive_attack',
+                      shapes=[self.xdim] + self.hidden_layer_specs['direct_att'] + [self.sdim],
+                      activ=ACTIV)
+            return mlp.forward(inputs)
 
     def _get_sensitive_from_logits(self, S_hat_logits):
         return tf.nn.sigmoid(S_hat_logits)

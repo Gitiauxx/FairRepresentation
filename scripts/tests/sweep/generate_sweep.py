@@ -1,7 +1,8 @@
 import yaml
 import numpy as np
 
-def main(scriptname, config):
+
+def main(scriptname, config, dname):
     command_filename = 'commands.sh'
     config_file = "config/{}".format(config)
     preamble = 'python'
@@ -18,6 +19,12 @@ def main(scriptname, config):
     
     del config_data['nboot']
 
+    # get config name
+    name = config_data['name']
+    del config_data['name']
+
+    # keep of list of experiments run in this sweep
+    tags_list  = []
     with open(command_filename, 'w') as command_file:
         for kw, kword in config_data.items():
     
@@ -27,8 +34,12 @@ def main(scriptname, config):
                 for value in value_range:
                     for iteration in range(nboot):
                         tag = '{}_{}_{}'.format(kw, value, iteration)
-                        command_file.write('{} {} --{} {} --tag {}\n'.format(preamble, scriptname, kw, value, tag))
+                        tags_list.append(tag)
+                        command_file.write('{} {} --dirname {} --{} {} --tag {}\n'.format(preamble, scriptname, dname, kw, value, tag))
+        
+        command_file.write('{} {} --dirname {} --config {}\n'.format(preamble, '..\\\\..\\\\lafr\\\\results.py', dname, config))
         
 
 if __name__ == '__main__':
-    main('../test_latfr.py', 'test1.yml')
+    dirname = 'C:\\\\Users\\\\Xavier\\\\fair_representation\\\\FairRepresentation\\\\data\\\\tests'
+    main('../test_latfr.py', 'test1.yml', dirname)

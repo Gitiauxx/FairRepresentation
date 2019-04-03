@@ -1,90 +1,91 @@
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_0
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_1
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_2
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_3
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_4
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_5
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_6
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_7
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_8
-python ../test_latfr.py --unbalance 0.0 --tag unbalance_0.0_9
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_0
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_1
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_2
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_3
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_4
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_5
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_6
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_7
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_8
-python ../test_latfr.py --unbalance 0.25 --tag unbalance_0.25_9
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_0
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_1
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_2
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_3
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_4
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_5
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_6
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_7
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_8
-python ../test_latfr.py --unbalance 0.5 --tag unbalance_0.5_9
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_0
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_1
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_2
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_3
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_4
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_5
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_6
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_7
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_8
-python ../test_latfr.py --unbalance 0.75 --tag unbalance_0.75_9
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_0
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_1
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_2
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_3
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_4
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_5
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_6
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_7
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_8
-python ../test_latfr.py --unbalance 1.0 --tag unbalance_1.0_9
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_0
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_1
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_2
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_3
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_4
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_5
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_6
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_7
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_8
-python ../test_latfr.py --unbalance 1.25 --tag unbalance_1.25_9
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_0
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_1
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_2
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_3
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_4
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_5
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_6
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_7
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_8
-python ../test_latfr.py --unbalance 1.5 --tag unbalance_1.5_9
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_0
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_1
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_2
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_3
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_4
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_5
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_6
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_7
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_8
-python ../test_latfr.py --unbalance 1.75 --tag unbalance_1.75_9
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_0
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_1
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_2
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_3
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_4
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_5
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_6
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_7
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_8
-python ../test_latfr.py --unbalance 2.0 --tag unbalance_2.0_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.1 --tag fairness_0.1_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.35 --tag fairness_0.35_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.6 --tag fairness_0.6_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 0.85 --tag fairness_0.85_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.1 --tag fairness_1.1_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.35 --tag fairness_1.35_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.6 --tag fairness_1.6_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 1.85 --tag fairness_1.85_9
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_0
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_1
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_2
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_3
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_4
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_5
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_6
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_7
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_8
+python ../test_latfr.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --fairness 2.1 --tag fairness_2.1_9
+python ..\\..\\lafr\\results.py --dirname C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests --config test1.yml

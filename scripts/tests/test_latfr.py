@@ -1,12 +1,11 @@
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-import sys
 import argparse
 
-from lafr import models, train, dataset, test, logging
+from lafr import models, train, dataset, test, results_logging
 
-def test1(n, resdirname, unbalance=1, sigma_noise=0.0, tag=None):
+def test1(n, resdirname, unbalance=1, sigma_noise=0.1, tag=None, auditor_coeff=0.1):
 
     # simulate a synthethic data with n covariates
     data = pd.DataFrame(index=np.arange(n))
@@ -32,13 +31,13 @@ def test1(n, resdirname, unbalance=1, sigma_noise=0.0, tag=None):
     # create model
     md = models.DPGanLafr(xdim=2,
                           zdim=2,
-                          auditor_coeff=0.5)
+                          auditor_coeff=auditor_coeff)
 
     # get dataset
     ds = dataset.Dataset('test_lafr.csv', ['x1', 'x2'], 'sensitive')
 
     # logging file
-    reslogger = logging.ResultLogger(resdirname, tag=tag)
+    reslogger = results_logging.ResultLogger(resdirname, tag=tag)
 
     with tf.Session() as sess:
 
@@ -52,29 +51,33 @@ def test1(n, resdirname, unbalance=1, sigma_noise=0.0, tag=None):
         # evaluation
         tester.evaluate(32)
 
-def main(**kwargs):
+def main(dirname, **kwargs):
 
-    unbalance = 0
-    if kwargs['unbalance']:
+    if 'unbalance' in kwargs:
         unbalance = kwargs['unbalance']
-    if kwargs['tag']:
+    if 'tag' in kwargs:
         tag = kwargs['tag']
+    if 'sigma_noise' in kwargs:
+        sigma_noise = kwargs['sigma_noise']
+    if 'auditor_coeff' in kwargs:
+        auditor_coeff = kwargs['auditor_coeff']
     
-    test1(20000, 'C:\\Users\\Xavier\\fair_representation\\FairRepresentation\\data\\tests', 
-                unbalance = unbalance,
+    test1(20000, dirname, 
+                auditor_coeff = auditor_coeff,
                 tag=tag)
 
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--unbalance')
+    parser.add_argument('--dirname')
+    parser.add_argument('--fairness')
     parser.add_argument('--tag')
     args = parser.parse_args()
 
-    kwargs_dict = {'unbalance': float(args.unbalance), 'tag':args.tag}
+    kwargs_dict = {'auditor_coeff': float(args.fairness), 'tag':args.tag}
     
-    main(**kwargs_dict)
+    main(args.dirname, **kwargs_dict)
 
 
 

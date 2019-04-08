@@ -5,17 +5,18 @@ import argparse
 
 from lafr import models, train, dataset, test, results_logging
 
-def test1(n, resdirname, unbalance=1, sigma_noise=0.1, tag=None, auditor_coeff=0.1):
+def test1(n, resdirname, unbalance=1, sigma_noise=0.1, tag=None, auditor_coeff=0.25):
 
     # simulate a synthethic data with n covariates
     data = pd.DataFrame(index=np.arange(n))
     data['x1'] = np.random.normal(size=n)
-    data['x2'] = np.random.normal(size=n)
+    data['x2'] = data['x1'] + 0.2 * np.random.normal(size=n)
+    data['x3'] = data['x2'] * data['x1'] + np.random.normal(size=n)
 
     data['noise'] = np.random.normal(scale=sigma_noise, size=n)
 
     # create senstivie attribute
-    data['w'] = np.exp(unbalance * (data['x2'] + data['x1'] + data['noise']) ** 2)
+    data['w'] = np.exp(unbalance * (data['x2'] + data['x1'] + data['x3'] + data['noise']) ** 2)
     data['w'] = data['w'] / (1 + data['w'])
   
     # draw sensitive attr accrding to w
@@ -29,12 +30,12 @@ def test1(n, resdirname, unbalance=1, sigma_noise=0.1, tag=None, auditor_coeff=0
     data.to_csv('test_lafr.csv')
 
     # create model
-    md = models.DPGanLafr(xdim=2,
-                          zdim=2,
+    md = models.DPGanLafr(xdim=3,
+                          zdim=3,
                           auditor_coeff=auditor_coeff)
 
     # get dataset
-    ds = dataset.Dataset('test_lafr.csv', ['x1', 'x2'], 'sensitive')
+    ds = dataset.Dataset('test_lafr.csv', ['x1', 'x2', 'x3'], 'sensitive')
 
     # logging file
     reslogger = results_logging.ResultLogger(resdirname, tag=tag)
@@ -46,7 +47,12 @@ def test1(n, resdirname, unbalance=1, sigma_noise=0.1, tag=None, auditor_coeff=0
         tester = test.Test(md, ds, sess, reslogger)
 
         # training
-        trainer.fit(100, 1)
+        trainer.fit(40, 1)
+
+        # atacker 
+        trainer.fit_attack(40)
+
+        print(trainer.train_L)
 
         # evaluation
         tester.evaluate(32)

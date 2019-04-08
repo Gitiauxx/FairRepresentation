@@ -5,11 +5,11 @@ from abc import ABC, abstractmethod
 # defaults
 EPS = 1e-8
 HIDDEN_LAYER_SPECS = {  # format as dict that maps network to list of hidden layer widths
-    'enc': [8, 2],
+    'enc': [128, 2],
     'cla': [1],
-    'dec': [8, 2],
-    'aud': [8, 2],
-    'att': [8, 2],
+    'dec': [128, 2],
+    'aud': [32, 2],
+    'att': [32, 2],
     'direct_att': [8, 2]
 }
 CLASS_COEFF = 1.
@@ -51,7 +51,7 @@ class AbstractBaseNet(ABC):
         self.hidden_layer_specs = hidden_layer_specs
         self.seed = seed
         self.hinge = hinge
-        tf.set_random_seed(self.seed)
+        #tf.set_random_seed(self.seed)
 
         self._define_vars()
         self.Z = self._encode(self.X)
@@ -73,7 +73,15 @@ class AbstractBaseNet(ABC):
         self.attacker_accuracy = self._get_acc(self.S, self.S_att)
         self.attacker_direct_accuracy= self._get_acc(self.S, self.S_att_dir)
         self.auditor_accuracy = self._get_acc(self.S, self.S_aud)
+
+        # second auditor
+        self.S_hat_logits2 = self._auditor(self.Z, scope_name='model/auditor2')
+        self.S_hat2 = self._get_sensitive_from_logits(self.S_hat_logits2)
+        self.auditor2_loss = self._get_aud_loss(self.S, self.S_hat2)
+
         self.loss = self._get_loss()
+
+        
 
     
     @abstractmethod
@@ -97,7 +105,7 @@ class AbstractBaseNet(ABC):
         pass
 
     @abstractmethod
-    def _attacker_direct(self, inputs, scope_name='model/attacker', reuse=False): # attacker to find sub-population where it can predict sensitive attributes
+    def _attacker_direct(self, inputs, scope_name='model/direct', reuse=False): # attacker to find sub-population where it can predict sensitive attributes
         pass
     
     @abstractmethod
@@ -138,7 +146,7 @@ class DPGanLafr(AbstractBaseNet):
         self.epoch = tf.placeholder("float", [1], name='epoch')
         return
 
-    def _encode(self, inputs, scope_name='model/enc_dec', reuse=False,beta=0.):
+    def _encode(self, inputs, scope_name='model/enc_dec', reuse=False,beta=0.01):
         with tf.variable_scope(scope_name, reuse=reuse):
             mlp = MLP(name='inputs_to_latents',
                       shapes=[self.xdim] + self.hidden_layer_specs['enc'] + [self.zdim],
@@ -153,21 +161,21 @@ class DPGanLafr(AbstractBaseNet):
             Z_and_S = tf.concat([latents, self.S], axis=1)
             return mlp.forward(Z_and_S)
 
-    def _auditor(self, latents, scope_name='model/auditor', reuse=False):
+    def _auditor(self, latents, scope_name='model/auditor', reuse=False, beta=0.01):
         with tf.variable_scope(scope_name, reuse=reuse):
             mlp = MLP(name='latents_to_sensitive',
                       shapes=[self.zdim] + self.hidden_layer_specs['aud'] + [self.sdim],
                       activ=ACTIV)
             return mlp.forward(latents)
 
-    def _attacker(self, latents, scope_name='model/attacker', reuse=False):
+    def _attacker(self, latents, scope_name='model/attacker', reuse=False, beta=0.01):
         with tf.variable_scope(scope_name, reuse=reuse):
             mlp = MLP(name='latents_to_sensitive_attack',
                       shapes=[self.zdim] + self.hidden_layer_specs['att'] + [self.sdim],
                       activ=ACTIV)
             return mlp.forward(latents)
 
-    def _attacker_direct(self, inputs, scope_name='model/direct', reuse=False):
+    def _attacker_direct(self, inputs, scope_name='model/direct', reuse=False, beta=0.01):
         with tf.variable_scope(scope_name, reuse=reuse):
             mlp = MLP(name='inputs_to_sensitive_attack',
                       shapes=[self.xdim] + self.hidden_layer_specs['direct_att'] + [self.sdim],
@@ -202,4 +210,4 @@ class DPGanLafr(AbstractBaseNet):
 
 
     def _get_loss(self):
-        return self.recon_coeff * self.decoder_loss - self.auditor_coeff * self.auditor_loss
+        return self.recon_coeff * self.decoder_loss - self.auditor_coeff * (self.auditor_loss + self.auditor2_loss)

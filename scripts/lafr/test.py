@@ -21,7 +21,7 @@ class Test(object):
         S_att = np.empty((0, 1))
 
         test_iter = self.data.get_batch_iterator('test', batch_size)
-        test_L = {'auditor_acc': 0, 'recon_err': 0., 'attacker_acc': 0., 'attacker_direct_acc': 0.}
+        test_L = {'auditor_acc': 0., 'auditor2_acc': 0., 'recon_err': 0., 'attacker_acc': 0., 'attacker_direct_acc': 0.}
 
         for x, s in test_iter:
             # encoder - decoder -- computing
@@ -35,6 +35,11 @@ class Test(object):
             S, auditor_acc = self.sess.run(auditor_op, feed_dict)
             test_L['auditor_acc'] += auditor_acc
             S_aud = np.concatenate((S_aud, S))
+
+            # auditor2 -- computing
+            auditor2_op = self.model.auditor2_accuracy
+            auditor2_acc = self.sess.run(auditor2_op, feed_dict)
+            test_L['auditor2_acc'] += auditor2_acc
 
             # attacker -- computing
             attacker_op = [self.model.S_att, self.model.attacker_accuracy]

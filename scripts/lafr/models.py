@@ -5,12 +5,12 @@ from abc import ABC, abstractmethod
 # defaults
 EPS = 1e-8
 HIDDEN_LAYER_SPECS = {  # format as dict that maps network to list of hidden layer widths
-    'enc': [128, 2],
+    'enc': [64, 2],
     'cla': [1],
-    'dec': [128, 2],
-    'aud': [32, 2],
-    'att': [32, 2],
-    'direct_att': [8, 2]
+    'dec': [32, 2],
+    'aud': [64, 2],
+    'att': [64, 2],
+    'direct_att': [64, 2]
 }
 CLASS_COEFF = 1.
 AUDITOR_COEFF = 0.
@@ -65,6 +65,7 @@ class AbstractBaseNet(ABC):
         self.S_att = self._get_prediction_from_logits(self.S_hat_attack_logits)
         self.S_att_dir = self._get_prediction_from_logits(self.S_hat_attack_direct_logits)
         self.S_aud = self._get_prediction_from_logits(self.S_hat_logits)
+        
 
         self.decoder_loss = self._get_dec_loss(self.X, self.X_hat)
         self.auditor_loss = self._get_aud_loss(self.S, self.S_hat)
@@ -78,6 +79,8 @@ class AbstractBaseNet(ABC):
         self.S_hat_logits2 = self._auditor(self.Z, scope_name='model/auditor2')
         self.S_hat2 = self._get_sensitive_from_logits(self.S_hat_logits2)
         self.auditor2_loss = self._get_aud_loss(self.S, self.S_hat2)
+        self.S_aud2 = self._get_prediction_from_logits(self.S_hat_logits2)
+        self.auditor2_accuracy = self._get_acc(self.S, self.S_aud2)
 
         self.loss = self._get_loss()
 
@@ -210,4 +213,5 @@ class DPGanLafr(AbstractBaseNet):
 
 
     def _get_loss(self):
-        return self.recon_coeff * self.decoder_loss - self.auditor_coeff * (self.auditor_loss + self.auditor2_loss)
+        return self.recon_coeff * self.decoder_loss - self.auditor_coeff / 2 * (self.auditor_loss  + self.auditor2_loss
+        )

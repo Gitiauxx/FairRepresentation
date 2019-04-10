@@ -33,13 +33,13 @@ def main(scriptname, config, dname):
                 
                 for value in value_range:
                     for iteration in range(nboot):
-                        tag = '{}_{}_{}'.format(kw, value, iteration)
+                        tag = '{}_{:.2f}_{}'.format(kw, value, iteration)
                         tags_list.append(tag)
-                        command_file.write('{} {} --dirname {} --{} {} --tag {}\n'.format(preamble, scriptname, dname, kw, value, tag))
+                        command_file.write('{} {} --dirname {} --{} {:.2f} --tag {}\n'.format(preamble, scriptname, dname, kw, value, tag))
         
         command_file.write('{} {} --dirname {} --config {}\n'.format(preamble, '..\\\\..\\\\lafr\\\\results.py', dname, config))
         
 
 if __name__ == '__main__':
-    dirname = 'C:\\\\Users\\\\Xavier\\\\fair_representation\\\\FairRepresentation\\\\data\\\\tests'
-    main('../test_latfr.py', 'test1.yml', dirname)
+    dirname = 'C:\\\\Users\\\\Xavier\\\\fair_representation\\\\FairRepresentation\\\\data\\\\two_adversaries'
+    main('../gaussian_mixtures.py', 'test1.yml', dirname)

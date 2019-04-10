@@ -28,6 +28,7 @@ class MLP(object):
         num_layers = len(self.weights)
         for layer in range(num_layers - 1):
             L = tf.add(tf.matmul(prev_L, self.weights[layer]['w']), self.weights[layer]['b'])
+            L = tf.add(L, self.beta * tf.nn.l2_loss(self.weights[layer]['w']))
             if self.activ == 'softplus':
                 L = tf.nn.softplus(L)
             elif self.activ == 'sigmoid':
@@ -40,6 +41,6 @@ class MLP(object):
                 pass
             else:
                 raise Exception('bad activation function')
-            prev_L = L + self.beta * tf.nn.l2_loss(self.weights[layer]['w'])
+            prev_L = L
         L = tf.add(tf.matmul(prev_L, self.weights[num_layers - 1]['w']), self.weights[num_layers - 1]['b'])
         return L

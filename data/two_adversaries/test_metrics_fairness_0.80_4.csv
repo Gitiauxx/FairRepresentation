@@ -1,0 +1,5 @@
+auditor_acc,0.4915919
+auditor2_acc,0.4966239
+recon_err,0.0021920
+attacker_acc,0.4966239
+attacker_direct_acc,0.6379915

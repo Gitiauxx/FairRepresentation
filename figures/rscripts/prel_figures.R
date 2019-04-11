@@ -2,21 +2,21 @@ options(tz="CA")
 options(tikzMetricPackages = c("\\usepackage{preview}", "\\usepackage[utf8]{inputenc}","\\usepackage[T1]{fontenc}", "\\usetikzlibrary{calc}", "\\usepackage{amssymb}"))
 #require(tikzDevice)
 
-# figure 1 a
+# figure one adversary
 res_fig <- read.csv("C:\\Users\\MX\\Documents\\Xavier\\FairRepresentation\\data\\one_adversary\\test_metrics_sensitivity_fairness.csv")
 res_fig <- data.table(res_fig)
 res_fig[, fairness:=as.numeric(substr(run, 10, 13))]
 res_fig <- res_fig[!is.na(value), .(accuracy=mean(value)), by=c("metrics", "fairness")]
-res_fig <- res_fig[metrics%in%c("auditor_acc", "attacker_acc", "attacker_direct_acc")]
+res_fig <- res_fig[metrics%in%c("auditor_acc",  "attacker_acc", "attacker_direct_acc")]
 res_fig[metrics == 'auditor_acc', metrics:='auditor']
 res_fig[metrics == 'attacker_acc', metrics:='attacker']
 res_fig[metrics == 'attacker_direct_acc', metrics:='attacker direct']
 
 
-tikz(file = "..\\figure_one_adversary.tex", width = 1.75, height = 1.75)
+tikz(file = "..\\figure_one_adversary.tex", width = 2.75, height = 2.75)
 
 plt1 <- ggplot(res_fig)
-plt1 <- plt1 + geom_point(aes(x=fairness, y=accuracy, color=metrics, shape=metrics), show.legend = F)
+plt1 <- plt1 + geom_point(aes(x=fairness, y=accuracy, color=metrics, shape=metrics))
 plt1 <- plt1 + geom_line(aes(x=fairness, y=accuracy, color=metrics) )            
 plt1 <- plt1 + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
                  panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -24,11 +24,11 @@ plt1 <- plt1 +  scale_color_manual(values=c("auditor"="red", "attacker"="blue", 
                                    labels=c("auditor", "attacker", "attacker direct"), 
                                    breaks=c("auditor acc", "attacker acc", "attacke direct"))
 plt1 <- plt1 + scale_x_continuous(limits = c(0, 1.5))
-plt1 <- plt1 + scale_y_continuous(limits = c(0.45, 0.75))
+plt1 <- plt1 + scale_y_continuous(limits = c(0.5, 0.7))
 #plt1 <- plt1 + theme(legend.position="bottom")
 
 plt1 <- plt1 + theme(text = element_text(size=17))
-plt1 <- plt1  + theme(legend.position = c(0.9, 0.3), legend.text=element_text(size=6))
+plt1 <- plt1  + theme(legend.position = c(0.9, 0.9), legend.text=element_text(size=6))
 plt1 <- plt1 + theme(legend.key=element_blank(),
                  legend.title=element_blank(),
                  legend.box="vertical")
@@ -40,8 +40,52 @@ plt1 <- plt1 + guides(color=guide_legend(
 )
 
 #plt1 <- plt1  + theme(legend.position=c(0, 3))
-#plt1 <- plt1 + labs(x="Fairness", y="l")
+plt1 <- plt1 + labs(x="Fairness", y="l")
 plt1
+
+dev.off()
+
+# figure one adversary
+res_fig2 <- read.csv("C:\\Users\\MX\\Documents\\Xavier\\FairRepresentation\\data\\two_adversaries\\test_metrics_sensitivity_fairness.csv")
+res_fig2 <- data.table(res_fig2)
+res_fig2[, fairness:=as.numeric(substr(run, 10, 13))]
+res_fig2 <- res_fig2[!is.na(value), .(accuracy=mean(value)), by=c("metrics", "fairness")]
+res_fig2 <- res_fig2[metrics%in%c("auditor_acc", "auditor2_acc", "attacker_acc", "attacker_direct_acc")]
+res_fig2[metrics == 'auditor_acc', metrics:='auditor']
+res_fig2[metrics == 'auditor2_acc', metrics:='auditor2']
+res_fig2[metrics == 'attacker_acc', metrics:='attacker']
+res_fig2[metrics == 'attacker_direct_acc', metrics:='attacker direct']
+
+
+tikz(file = "..\\figure_two_adversary.tex", width = 2.75, height = 2.75)
+
+plt2 <- ggplot(res_fig2)
+plt2 <- plt2 + geom_point(aes(x=fairness, y=accuracy, color=metrics, shape=metrics))
+plt2 <- plt2 + geom_line(aes(x=fairness, y=accuracy, color=metrics) )            
+plt2 <- plt2 + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+                     panel.background = element_blank(), axis.line = element_line(colour = "black"))
+plt2 <- plt2 +  scale_color_manual(values=c("auditor"="red", "attacker"="blue", "auditor2"="gray", "attacker direct"="black"), 
+                                   labels=c("auditor", "auditor2", "attacker", "attacker direct"), 
+                                   breaks=c("auditor", "auditor2", "attacker", "attacke direct"))
+plt2 <- plt2 + scale_x_continuous(limits = c(0, 1.5))
+plt2 <- plt2 + scale_y_continuous(limits = c(0.5, 0.7))
+#plt1 <- plt1 + theme(legend.position="bottom")
+
+plt2 <- plt2 + theme(text = element_text(size=17))
+plt2 <- plt2  + theme(legend.position = c(0.9, 0.8), legend.text=element_text(size=6))
+plt2 <- plt2 + theme(legend.key=element_blank(),
+                     legend.title=element_blank(),
+                     legend.box="vertical")
+plt2 <- plt2 + theme(text = element_text(size=10))
+plt2 <- plt2 + guides(color=guide_legend(
+  keywidth=0.2,
+  keyheight=0.2,
+  default.unit="inch")
+)
+
+#plt1 <- plt1  + theme(legend.position=c(0, 3))
+plt2 <- plt2 + labs(x="Fairness", y="l")
+plt2
 
 dev.off()
 

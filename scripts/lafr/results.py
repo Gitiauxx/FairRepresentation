@@ -27,7 +27,7 @@ def combine_results(dname, config):
         for kw, kword in config_data.items():
             if 'min_value' in kword:
                 value_range = np.linspace(kword['min_value'], kword['max_value'], kword['steps'])
-                tag_list = ['{}_{}_{}'.format(kw, value, iteration) for value in value_range for iteration in range(nboot) ]
+                tag_list = ['{}_{:.2f}_{}'.format(kw, value, iteration) for value in value_range for iteration in range(nboot) ]
 
         # collect all results with the same tag
         table_list = []

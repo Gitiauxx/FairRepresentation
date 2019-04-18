@@ -213,5 +213,5 @@ class DPGanLafr(AbstractBaseNet):
 
 
     def _get_loss(self):
-        return self.recon_coeff * self.decoder_loss - self.auditor_coeff / 2 * (self.auditor_loss  + self.auditor2_loss
+        return self.recon_coeff * self.decoder_loss - self.auditor_coeff / 2  * (self.auditor_loss  + self.auditor2_loss
         )

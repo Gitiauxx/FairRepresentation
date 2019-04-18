@@ -41,5 +41,5 @@ def main(scriptname, config, dname):
         
 
 if __name__ == '__main__':
-    dirname = 'C:\\\\Users\\\\Xavier\\\\fair_representation\\\\FairRepresentation\\\\data\\\\two_adversaries'
+    dirname = 'C:\\\\Users\\\\Xavier\\\\fair_representation\\\\FairRepresentation\\\\data\\\\two_adversaries50'
     main('../gaussian_mixtures.py', 'test1.yml', dirname)

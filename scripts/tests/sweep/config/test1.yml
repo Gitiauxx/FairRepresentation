@@ -1,6 +1,6 @@
 name: 'sensitivity_fairness'
 
-nboot: 10
+nboot: 50
 
 fairness:
  min_value: 0.0

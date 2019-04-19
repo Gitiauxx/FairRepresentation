@@ -1,0 +1,8 @@
+name: 'sensitivity_fairness'
+
+nboot: 10
+
+fairness:
+ min_value: 0.0
+ max_value: 1.4
+ steps: 15

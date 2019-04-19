@@ -7,7 +7,7 @@ EPS = 1e-8
 HIDDEN_LAYER_SPECS = {  # format as dict that maps network to list of hidden layer widths
     'enc': [64, 2],
     'cla': [1],
-    'dec': [32, 2],
+    'dec': [64, 2],
     'aud': [64, 2],
     'att': [64, 2],
     'direct_att': [64, 2]
